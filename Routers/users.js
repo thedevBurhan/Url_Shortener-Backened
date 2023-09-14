@@ -55,6 +55,7 @@ router.post("/login",async(req,res)=>{
 })
 
 router.get("/all",async(req,res)=>{
+    
     try {
     const users = await getAllUsers(req)
           if(users.length<=0){
