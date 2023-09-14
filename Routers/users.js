@@ -1,7 +1,6 @@
 import express from "express";
-import { addUsers, generateJwtToken, getUser } from "../Controllers/user.js";
+import { addUsers, generateJwtToken, getUser,getAllUsers,deleteUsersData } from "../Controllers/user.js";
 import bcrypt from "bcrypt";
-
 //initalize the router
 const router=express.Router();
 
@@ -55,5 +54,32 @@ router.post("/login",async(req,res)=>{
     }
 })
 
-
+router.get("/all",async(req,res)=>{
+    try {
+    const users = await getAllUsers(req)
+          if(users.length<=0){
+            res.status(400).json({data:"User Not Found"})
+            return
+          }
+           res.status(200).json({data:users})
+      } catch (error) {
+         console.log(error)
+         res.send(500).json({data:"Internal Server Error"})
+      }
+       
+})
+// to delete a users data
+router.delete("/delete/:id",async(req,res)=>{
+    try {
+      const {id}=req.params;
+      if(!id){
+        return res.status(400).json({data:"Wrong Request"})  
+      }
+      const result=await deleteUsersData(id);
+      res.status(200).json({data:{result:result,message:"Deteled Sucessfully"}})
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({data:"Internal Server Error"})
+    }
+  })
 export const usersRouter=router;  

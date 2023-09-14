@@ -1,7 +1,7 @@
 import { client } from "../Database/db.js";
 import  jwt  from "jsonwebtoken";
 import dotenv from "dotenv"
-
+import { ObjectId } from "mongodb";
 //configure thhe environment
 dotenv.config();
 const SECRETKEY=process.env.SECRETKEY 
@@ -27,4 +27,19 @@ export function getUser(userEmail){
     .db("URL_SHORTENER")
     .collection("UrlShortener")
     .insertMany(urlData)
+ }
+//To get details by key &value
+export function getAllUsers(req){
+    return client
+    .db("URL_SHORTENER")
+    .collection("Users")
+    .find(req.query)//get by our requirement in postman 
+    .toArray();
+}
+//to delete a student data
+export function deleteUsersData(id){
+    return client
+    .db("URL_SHORTENER")
+    .collection("Users")
+   .deleteOne({_id:new ObjectId(id)})
  }
