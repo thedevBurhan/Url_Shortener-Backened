@@ -44,11 +44,11 @@ async function handleGetAnalytics(req,res){
 async function handleDeleteUrl(req,res){
      try{
           await client.connect();
-          const {Id}=req.params;
-          if(!Id){
+          const {id}=req.params;
+          if(!id){
             return res.status(400).json({data:"Wrong Request"})  
           }
-          const result=await deleteUrlData(Id);
+          const result=await deleteUrlData(id);
           res.status(200).json({data:{result:result,message:"Deteled URl Sucessfully"}})
         } catch (error) {
           console.log(`${error} No URL is Deleted`)
