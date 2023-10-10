@@ -44,13 +44,13 @@ async function handleGetAnalytics(req,res){
 async function handleDeleteUrl(req,res){
      try{
           await client.connect();
-          const id=req.params.id.trim();
-          if(!id){
+          const _id=req.params._id.trim();
+          if(!_id){
             return res.status(400).json({data:"Wrong Request"})  
           }
           const db = client.db("URL_SHORTENER");
           const collection = db.collection("UrlShortener");
-          const result= await collection.deleteOne({id});
+          const result= await collection.deleteOne(_id);
           res.status(200).json({data:{result:result,message:" URl Deteled Sucessfully"}})
         } catch (error) {
           console.log(`${error} No URL is Deleted`)

@@ -7,5 +7,5 @@ const router=express.Router();
 router.post("/",generateNewShortURL);
 
 router.get("/analytics/:shortId",handleGetAnalytics);
-router.delete("/delete/:Id",handleDeleteUrl);
+router.delete("/delete/:_id",handleDeleteUrl);
 export const urlRouter=router;
