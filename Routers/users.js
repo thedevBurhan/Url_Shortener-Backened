@@ -1,5 +1,5 @@
 import express from "express";
-import { addUsers, generateJwtToken, getUser,getAllUsers,deleteUsersData } from "../Controllers/user.js";
+import { addUsers, generateJwtToken, getUser,getAllUsers,deleteUsersData ,deleteUrlData} from "../Controllers/user.js";
 import bcrypt from "bcrypt";
 //initalize the router
 const router=express.Router();
@@ -82,5 +82,18 @@ router.delete("/delete/:id",async(req,res)=>{
       console.log(error)
       res.status(500).json({data:"Internal Server Error"})
     }
+  })
+  router.delete("/deleteUrl/:id",async(req,res)=>{
+    try {
+         const {id}=req.params;
+         if(!id){
+           return res.status(400).json({data:"Wrong Request"})  
+         }
+         const result=await deleteUrlData(id);
+         res.status(200).json({data:{result:result,message:"Deteled URl Sucessfully"}})
+       } catch (error) {
+         console.log(`${error} No URL is Deleted`)
+         res.status(500).json({data:"Internal Server Error"})
+       }
   })
 export const usersRouter=router;  

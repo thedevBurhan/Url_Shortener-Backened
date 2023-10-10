@@ -42,11 +42,7 @@ app.get("/:shortId", async (req, res) => {
         }
       );
   
-      // console.log(
-      //   "Query:",
-      //   JSON.stringify({ shortID }) // Use exact match in query
-      // );
-      // console.log("findOneAndUpdate Result:", result);
+ 
   
       if (result) {
         console.log("Document found and updated successfully");

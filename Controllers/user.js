@@ -43,3 +43,10 @@ export function deleteUsersData(id){
     .collection("Users")
    .deleteOne({_id:new ObjectId(id)})
  }
+//to delete a url data
+export function deleteUrlData(id){
+    return client
+    .db("URL_SHORTENER")
+    .collection("UrlShortener")
+   .deleteOne({_id:new ObjectId(id)})
+ }

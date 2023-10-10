@@ -41,4 +41,6 @@ async function handleGetAnalytics(req,res){
      res.status(500).send("Error updating document");
    }
 }
+
+
 export {generateNewShortURL,handleGetAnalytics};
