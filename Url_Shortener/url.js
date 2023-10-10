@@ -44,7 +44,7 @@ async function handleGetAnalytics(req,res){
 async function handleDeleteUrl(req,res){
      try{
           await client.connect();
-          const {id}=req.params.id.trim();
+          const id=req.params.id.trim();
           if(!id){
             return res.status(400).json({data:"Wrong Request"})  
           }
