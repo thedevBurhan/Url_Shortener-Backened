@@ -24,7 +24,7 @@ router.post("/signup",async(req,res)=>{
         res.status(400).json({data:"Given email already exist"})
     } catch (error) {
         console.log(error)
-        res.send(500).json({data:"Internal Server Error"})
+        res.send(500).json({data:"Internal Server Error"}).send(`Internal Server Error`);
      
     }
 })
@@ -83,6 +83,8 @@ router.delete("/delete/:id",async(req,res)=>{
       res.status(500).json({data:"Internal Server Error"})
     }
   })
+
+  // to delete a URL data
   router.delete("/deleteUrl/:id",async(req,res)=>{
     try {
          const {id}=req.params;
