@@ -41,6 +41,19 @@ async function handleGetAnalytics(req,res){
      res.status(500).send("Error updating document");
    }
 }
+async function handleDeleteUrl(req,res){
+     try{
+          await client.connect();
+          const {Id}=req.params;
+          if(!Id){
+            return res.status(400).json({data:"Wrong Request"})  
+          }
+          const result=await deleteUrlData(Id);
+          res.status(200).json({data:{result:result,message:"Deteled URl Sucessfully"}})
+        } catch (error) {
+          console.log(`${error} No URL is Deleted`)
+          res.status(500).json({data:"Internal Server Error"})
+        }
+}
 
-
-export {generateNewShortURL,handleGetAnalytics};
+export {generateNewShortURL,handleGetAnalytics,handleDeleteUrl};
