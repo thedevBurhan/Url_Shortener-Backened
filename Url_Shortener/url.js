@@ -63,7 +63,7 @@ async function AllURLData(req, res) {
 //To get  URl Data for Specific User
 async function GetURLDataForSpecificUser(req, res) {
   try {
-    let allurl = await getAllUsers.find();
+    let allurl = await getAllUsers.find({ _id: req.params.id }).toArray();
     const url = allurl.filter((item) => item.userId == req.params.id);
     res.json({
       message: "url send successfull",
