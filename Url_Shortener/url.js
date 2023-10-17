@@ -64,7 +64,7 @@ async function AllURLData(req, res) {
 async function GetURLDataForSpecificUser(req, res) {
   try {
     let allurl = await getAllURLData(req).toArray();
-    const url = allurl.filter((item) => item.data.userId == req.params.id);
+    const url = allurl.filter((item) => item.userId == req.params.id);
     res.json({
       message: "url send successfull",
       statusCode: 200,
