@@ -10,10 +10,10 @@ export function getAllURLData(req){
     .toArray();
  }
 //to delete a URl data
-export function deleteUrlData(id){
+export function deleteUrlData(shortid){
     return client
     .db("URL_SHORTENER")
     .collection("UrlShortener")
-    .findOne({_id:new ObjectId( id)})
-   .deleteOne({_id:new ObjectId(id)})
+    .findOne({shortID:shortid})
+   .delete()
  }

@@ -8,13 +8,13 @@ router.post("/",generateNewShortURL);
 
 router.get("/analytics/:shortId",handleGetAnalytics);
 // // to delete a URL data
-router.delete("/deleteUrl/:id",async(req,res)=>{
+router.delete("/deleteUrl/:shortID",async(req,res)=>{
     try {
-         const {id}=req.params;
-         if(!id){
+         const {shortID}=req.params.shortID;
+         if(!shortID){
            return res.status(400).json({data:"Wrong Request"})  
          }
-         const result=await deleteUrlData(id);
+         const result=await deleteUrlData(shortID);
          res.status(200).json({data:{result:result,message:"Deteled URl Sucessfully"}})
        } catch (error) {
          console.log(`${error} No URL is Deleted`)
