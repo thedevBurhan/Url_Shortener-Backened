@@ -6,7 +6,7 @@ export function getAllURLData(req){
     return client
     .db("URL_SHORTENER")
     .collection("UrlShortener")
-    .find(req)
+    .find(req.query)
     .toArray();
  }
 //to delete a URl data
