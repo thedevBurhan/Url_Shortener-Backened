@@ -6,7 +6,7 @@ export function getAllURLData(req){
     return client
     .db("URL_SHORTENER")
     .collection("UrlShortener")
-    .find(req.query)//get by our requirement in postman 
+    .find(req)
     .toArray();
  }
 //to delete a URl data

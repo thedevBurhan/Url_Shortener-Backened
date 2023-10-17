@@ -1,5 +1,5 @@
 import shortid from "shortid";
-import { UrlShortener, getAllUsers } from "../Controllers/user.js";
+import { UrlShortener } from "../Controllers/user.js";
 import { deleteUrlData, getAllURLData } from "../Controllers/url.js";
 import { client } from "../Database/db.js";
 //to generate Short URl
@@ -63,7 +63,7 @@ async function AllURLData(req, res) {
 //To get  URl Data for Specific User
 async function GetURLDataForSpecificUser(req, res) {
   try {
-    let allurl = await getAllUsers.find({ _id: req.params.id }).toArray();
+    let allurl = await getAllURLData.find({ userId: req.params.id }).toArray();
     const url = allurl.filter((item) => item.userId == req.params.id);
     res.json({
       message: "url send successfull",
