@@ -4,7 +4,7 @@ import { deleteUrlData ,getAllURLData} from "../Controllers/url.js";
 import { client } from "../Database/db.js";
 //to generate Short URl
 async function generateNewShortURL(req,res){
-    const body=req.body;
+    const {body,id}=req.body;
     let date= new Date();
       let currentTimeStamp=date.toUTCString()
     if(!body.url) return res.status(400).json({error:"URL is required"})
@@ -15,6 +15,7 @@ try{
        shortID:shortID,
        redirectURL:body.url,
        visitHistory:[{ timestamp: currentTimeStamp}],
+       userId:id
 
 }])
 
@@ -67,7 +68,7 @@ async function AllURLData (req,res){
      try {
           
           let allurl =await getAllUsers.find() 
-     const url = allurl.filter((item)=>item._id == req.params.id)
+     const url = allurl.filter((item)=>item.userId == req.params.id)
      res.json({
          message:'url send successfull',
          statusCode: 200,
