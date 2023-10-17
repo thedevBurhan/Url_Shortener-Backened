@@ -18,5 +18,5 @@ router.delete("/deleteUrl/:shortID", deleteURL);
 //To Get AllURL Data
 router.get("/allURL", AllURLData);
 //To get specific url for user
-router.get("/SpecificUser", GetURLDataForSpecificUser);
+router.get("/SpecificUser/:id", GetURLDataForSpecificUser);
 export const urlRouter = router;
