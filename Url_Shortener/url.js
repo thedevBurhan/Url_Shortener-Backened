@@ -54,7 +54,7 @@ async function AllURLData(req, res) {
       res.status(400).json({ data: "url Not Found" });
       return;
     }
-    res.status(200).json({ data: url });
+    res.status(200).json({url });
   } catch (error) {
     console.log(error);
     res.send(500).json({ data: "Internal Server Error" });
