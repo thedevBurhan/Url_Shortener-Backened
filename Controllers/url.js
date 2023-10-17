@@ -14,6 +14,6 @@ export function deleteUrlData(shortid){
     return client
     .db("URL_SHORTENER")
     .collection("UrlShortener")
-    .findOne({shortID:shortid})
-   .delete()
- }
+    .findOneAndDelete({ shortID: shortid }); // Use findOneAndDelete to find and delete the document
+}
+ 
