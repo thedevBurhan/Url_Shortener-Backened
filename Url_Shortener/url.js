@@ -63,12 +63,8 @@ async function AllURLData(req, res) {
 //To get  URl Data for Specific User
 async function GetURLDataForSpecificUser(req, res) {
   try {
-     await client.connect();
-    
-     const db = client.db("URL_SHORTENER");
-     const collection = db.collection("UrlShortener");
-    let allurl =  collection.find().toArray();
-    const url = allurl.filter((item) => item.userId == req.params.id);
+    let allurl = await getAllURLData(req).toArray();
+    const url = allurl.filter((item) => item.data.userId == req.params.id);
     res.json({
       message: "url send successfull",
       statusCode: 200,
