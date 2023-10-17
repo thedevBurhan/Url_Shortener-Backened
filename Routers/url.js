@@ -1,6 +1,6 @@
 import express from "express";
 import {generateNewShortURL,handleGetAnalytics} from "../Url_Shortener/url.js"
-
+import { deleteUrlData } from "../Controllers/url.js";
 //initalize the router
 const router=express.Router();
 
