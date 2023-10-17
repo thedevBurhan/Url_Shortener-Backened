@@ -68,7 +68,7 @@ async function GetURLDataForSpecificUser(req, res) {
      const db = client.db("URL_SHORTENER");
      const collection = db.collection("UrlShortener");
     let allurl =  collection.find().toArray();
-    const url = allurl.filter((item) => item.data.userId == req.params.id);
+    const url = allurl.filter((item) => item.userId == req.params.id);
     res.json({
       message: "url send successfull",
       statusCode: 200,
