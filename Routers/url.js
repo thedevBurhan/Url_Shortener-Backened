@@ -1,6 +1,6 @@
 import express from "express";
 import {generateNewShortURL,handleGetAnalytics} from "../Url_Shortener/url.js"
-import { deleteUrlData } from "../Controllers/url.js";
+import { deleteUrlData ,getAllURLData} from "../Controllers/url.js";
 //initalize the router
 const router=express.Router();
 
@@ -21,4 +21,20 @@ router.delete("/deleteUrl/:id",async(req,res)=>{
          res.status(500).json({data:"Internal Server Error"})
        }
   })
+  //To Get URL Data
+  router.get("/allURL",async(req,res)=>{
+    
+    try {
+    const url = await getAllURLData(req)
+          if(url.length<=0){
+            res.status(400).json({data:"url Not Found"})
+            return
+          }
+           res.status(200).json({data:url})
+      } catch (error) {
+         console.log(error)
+         res.send(500).json({data:"Internal Server Error"})
+      }
+       
+})
 export const urlRouter=router;
