@@ -14,7 +14,7 @@ router.post("/", generateNewShortURL);
 
 router.get("/analytics/:shortId", handleGetAnalytics);
 // // to delete a URL data
-router.delete("/deleteUrl/:shortID", deleteURL);
+router.delete("/deleteUrl/:id", deleteURL);
 //To Get AllURL Data
 router.get("/allURL", AllURLData);
 //To get specific url for user
