@@ -1,5 +1,5 @@
 import { client } from "../Database/db.js";
-
+import { ObjectId } from "mongodb";
 
 //to GEt a URl data
 export function getAllURLData(req){
@@ -10,10 +10,9 @@ export function getAllURLData(req){
     .toArray();
  }
 //to delete a URl data
-export function deleteUrlData(shortid){
+export function deleteUrlData(id){
     return client
     .db("URL_SHORTENER")
     .collection("UrlShortener")
-    .findOneAndDelete({ shortID: shortid }); // Use findOneAndDelete to find and delete the document
+    .deleteOne({_id:new ObjectId(id)}); // Use findOneAndDelete to find and delete the document
 }
- 

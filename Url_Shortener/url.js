@@ -16,7 +16,7 @@ async function generateNewShortURL(req, res) {
         shortID: shortID,
         redirectURL: body.url,
         visitHistory: [{ timestamp: currentTimeStamp }],
-        userId:body.id,
+        userId: body.id,
       },
     ]);
 
@@ -54,7 +54,7 @@ async function AllURLData(req, res) {
       res.status(400).json({ data: "url Not Found" });
       return;
     }
-    res.status(200).json({url });
+    res.status(200).json({ url });
   } catch (error) {
     console.log(error);
     res.send(500).json({ data: "Internal Server Error" });
@@ -62,17 +62,22 @@ async function AllURLData(req, res) {
 }
 //To get  URl Data for Specific User
 async function GetURLDataForSpecificUser(req, res) {
+  let allurl = await getAllURLData(req);
+  console.log(allurl);
   try {
-    let allurl = await getAllURLData(req).toArray();
-    const url = allurl.filter((item) => item.userId == req.params.id);
-    res.json({
-      message: "url send successfull",
-      statusCode: 200,
-      urls: url.reverse(),
-    });
+    if (allurl > 0) {
+      res.status(400).json({ data: "No Data found" });
+    } else {
+      const url = allurl.filter((item) => item.userId == req.params.id);
+      res.json({
+        message: "url send successfull",
+        statusCode: 200,
+        urls: url.reverse(),
+      });
+    }
   } catch (error) {
     res.json({
-      message: "Internal server error",
+      message: "Internal server error ",
       statusCode: 500,
     });
   }
@@ -80,20 +85,22 @@ async function GetURLDataForSpecificUser(req, res) {
 // To Detele a Specific URL
 async function deleteURL(req, res) {
   try {
-    const shortID = req.params.shortID; // Use req.params.shortID directly
-    if (!shortID) {
+    const id = req.params.id;
+
+    if (!id) {
       return res.status(400).json({ data: "Wrong Request" });
+    } else {
+      const result = await deleteUrlData(id);
+      console.log(result);
+      res
+        .status(200)
+        .json({ data: { result: result, message: "Deteled Sucessfully" } });
     }
-    const result = await deleteUrlData(shortID);
-    res
-      .status(200)
-      .json({ data: { result: result, message: "Deteled URl Sucessfully" } });
   } catch (error) {
-    console.log(`${error} No URL is Deleted`);
+    console.log(error);
     res.status(500).json({ data: "Internal Server Error" });
   }
 }
-
 export {
   generateNewShortURL,
   handleGetAnalytics,
