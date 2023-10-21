@@ -20,9 +20,9 @@ async function generateNewShortURL(req, res) {
       },
     ]);
 
-    return res.status(200).json({ shortenerURl: shortID });
+    return res.status(200).json({ shortenerURl: shortID ,message:"Url create successfull",statusCode:200});
   } catch (error) {
-    return res.status(500).json({ error: "Internal Server Error" });
+    return res.status(500).json({ message: "Internal Server Error",statusCode:500 });
   }
 }
 
