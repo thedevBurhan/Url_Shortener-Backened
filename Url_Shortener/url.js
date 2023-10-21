@@ -94,11 +94,13 @@ async function deleteURL(req, res) {
       console.log(result);
       res
         .status(200)
-        .json({ data: { result: result, message: "Deteled Sucessfully" } });
+        .json({ data: { result: result,statusCode:200,
+          message:"Short url deleted successfully" } });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ data: "Internal Server Error" });
+    res.status(500).json({ data: "Internal Server Error", message:'Internal server error',
+    statusCode:500, });
   }
 }
 export {
