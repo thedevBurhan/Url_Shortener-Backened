@@ -6,7 +6,7 @@ const SECRETKEY=process.env.SECRETKEY
 
 export async function isAuthenticated(req,res,next){
      //check if access is give
-     const token=req.headers["x-auth-token"];
+     const token=req.headers["authtoken"];
      if( ! token){
        return res.status(400).json({data:"Invalid Authorization"})
      }
